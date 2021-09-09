@@ -4,26 +4,36 @@
 <head><title>Проект 42</title></head>
 <body>
 <?php
+require_once "vendor/autoload.php";
+
+use GuzzleHttp\Client;
+
 $url = "http://example.com";
+$client = new Client(["base_uri" => 'http://gimsyaroslavl.narod.ru/', 'timeout'=>2]);
+$response = $client->get('Rescuer/Rescuers_Guidebook/ch143_flood.htm');
+?>
+<table style="border: solid 2px">
+    <tbody>
+    <tr>
+        <td>Response code:</td>
+        <td><?= $response->getStatusCode() ?></td>
+    </tr>
+    <tr>
+        <td>Response status:</td>
+        <td><?= $response->getReasonPhrase() ?></td>
+    </tr>
 
-$mem = new Memcached();
-$mem->addServer("localhost", 11211);
-$isHit = !$mem->add($url, "");
-var_dump($mem->getLastErrorMessage());
-if ($isHit&&$mem->getLastErrorCode()===Memcached::RES_NOTSTORED) {
-    $matches = unserialize($mem->get($url));
-}
-else {
+
+    </tbody>
+</table>
 
 
-    $curl = curl_init($url);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    $content = curl_exec($curl);
-    curl_close($curl);
-    preg_match_all("#<a.*?href=\"(.*?)\".*?>(.*?)</a>#",$content,$matches);
-    $mem->set($url, serialize($matches));
-    }
+<?php
+$content = $response->getBody();
 
+//echo htmlspecialchars($content);
+$matches = [];
+preg_match_all("#<a\s+(?:[^>]*?\s+)?href=\"(http://.*?)\"#", $content, $matches);
 
 var_dump($matches);
 
