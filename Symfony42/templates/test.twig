@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+{% block stylesheets %}
+
+{{ parent()  }}
+<style>
+li {color: green}
+</style>
+{% endblock %}
+{% block body %}
+    {{ block("title")}} in {{ _self }} on {{ _charset }}, {{ who | join(' ') |capitalize | e }}!
+<br>
+{% block list %}
+<ul>
+    {% for i in range(low=1, high=10, step=2) %}
+    <li> {{ i }} </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+    {{ dump(_context) }}
+<img src="{{ asset('guinea.png', 'img') }}" height="50%" width="50%"/>
+{% endblock %}

@@ -1,1 +1,1 @@
-@php composer.phar %*
+@php ../composer.phar %*
