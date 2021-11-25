@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Улицы{% endblock %}
+
+{% block body %}
+
+    <table>
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Индекс</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for street in streets %}
+            <tr>
+                <td><label id="street_name">{{ street.name }} </label></td>
+
+                <td><label id="zipcode"> {{ street.index }} </label></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

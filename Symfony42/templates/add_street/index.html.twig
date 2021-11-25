@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AddStreetController!{% endblock %}
+
+{% block body %}
+    <form action="{{ path("add_street") }}">
+        <table>
+            <tbody>
+            <tr>
+                <td><label for="street_name">Название</label></td>
+                <td><input id="street_name" type="text" name="street_name"/></td>
+            </tr>
+            <tr>
+                <td><label for="zipcode">Индекс</label></td>
+                <td><input id="zipcode" type="text" name="zipcode"/></td>
+            </tr>
+
+            </tbody>
+        </table>
+        <input type="submit" name="ОТОСЛАТЬ" value="ОТОСЛАТЬ">
+    </form>
+{% endblock %}
