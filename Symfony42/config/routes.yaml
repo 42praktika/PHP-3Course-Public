@@ -4,3 +4,5 @@
 #index:
 #  path: /
 #  controller: App\Controller\HelloWorldController::world
+app_logout:
+  path: logout

@@ -14,12 +14,23 @@ services:
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
-        resource: '../src/'
+        resource: '../src/*'
         exclude:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Tests/'
 
-    # add more service definitions when explicit configuration is needed
+    App\Service\GreetingGenerator:
+      arguments:
+        - '@monolog.logger.console'
+        - "ru"
+
+    greeting:
+      alias: App\Service\GreetingGenerator
+      public: true
+
+
+
+  # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
